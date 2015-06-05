@@ -16,6 +16,6 @@ class Client
   post: (path, data, callback) ->
 
 
-  auth_code: ''
+  auth_code: '3bb9fd40539be218992da74974152643006bbce9b19ec464781d080720cce546'
 
 module.exports = Client
