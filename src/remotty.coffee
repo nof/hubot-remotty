@@ -13,10 +13,10 @@ class Remotty extends Adapter
     @robot.logger.info "Reply"
 
   run: ->
-    @robot.logger.info "Run"
+    @robot.logger.info "Run Run Run"
     @emit "connected"
     user = new User 1001, name: 'Sample User'
-    message = new TextMessage user, 'Some Sample Message', 'MSG-001'
+    message = new TextMessage user, 'hoge Sample Message', 'MSG-001'
     @robot.receive message
 
 exports.use = (robot) ->
