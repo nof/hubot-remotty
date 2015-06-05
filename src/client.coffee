@@ -9,16 +9,13 @@ class Client
       'oauth2/token',
       null
     )
+    @consumer.useAuthorizationHeaderforGET(true)
 
   # https://www.remotty.net/api/v1/rooms/1/participations/3517/comments/200930
   get: (path, callback) ->
-    console.log(callback)
-    console.log(path)
-    console.log(@consumer)
-    console.log(@consumer.get)
     @consumer.get(
-      "https://www.remotty.net/api/v1#{path}",
-      @token,
+      "https://www.remotty.net/api/v1#{path}.json",
+      @auth_code,
       callback
     )
 

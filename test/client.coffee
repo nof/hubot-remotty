@@ -1,13 +1,13 @@
 Client = require '../src/client'
 
-should = require 'should'
+require 'should'
 
 describe 'Client', ->
-  it 'get token', ->
+  it 'get token', (done) ->
     client = new Client
 
     client.get(
-      '/rooms/1/participations/3517/comments/200930',
+      '/rooms/participations/3517/comments',
       (data) ->
         data.should.eql 100
         done()
