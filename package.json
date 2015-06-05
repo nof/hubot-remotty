@@ -1,0 +1,9 @@
+{
+  "name": "hubot-remotty",
+  "version": "1.0.0",
+  "main": "src/remotty.coffee",
+  "devDependencies": {
+    "coffee-script": ">=1.2.0",
+    "hubot": "^2.12.0"
+  }
+}
