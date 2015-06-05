@@ -1,4 +1,5 @@
 oauth = require('oauth')
+
 class Client
   constructor: (options) ->
     @consumer = new oauth.OAuth2(
