@@ -1,0 +1,9 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch oauth-access
+# Changes to be committed:
+# 	modified:   package.json
+# 	modified:   src/client.coffee
+# 	modified:   test/client.coffee

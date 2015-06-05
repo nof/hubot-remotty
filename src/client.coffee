@@ -1,27 +1,21 @@
-oauth = require('oauth')
+request = require 'request'
 
 class Client
   constructor: (options) ->
-    @consumer = new oauth.OAuth2(
-      @key,
-      @secret,
-      'https://www.remotty.net/',
-      null,
-      'oauth2/token',
-      null
-    )
-    @consumer.useAuthorizationHeaderforGET(true)
 
   # https://www.remotty.net/api/v1/rooms/1/participations/3517/comments/200930
   get: (path, callback) ->
-    @consumer.get(
-      "https://www.remotty.net/api/v1#{path}.json",
-      @auth_code,
-      callback
-    )
+    options = {
+      url: "https://www.remotty.net/api/v1#{path}.json",
+      headers: {
+        'Authorization':'Bearer ' + @auth_code
+      },
+    }
+    request options, callback
 
-  key: ''
-  secret: ''
+  post: (path, data, callback) ->
+
+
   auth_code: ''
 
 module.exports = Client
