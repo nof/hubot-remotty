@@ -1,6 +1,6 @@
 Client = require '../src/client'
 
-should = require 'should'
+assert = require('power-assert')
 
 describe 'Client', ->
   it 'get comments', (done) ->
@@ -9,11 +9,8 @@ describe 'Client', ->
     client.get(
       '/rooms/participations/3517/comments/200930',
       (error, response, body) ->
-        console.log('----1')
-        console.log(error)
-        # console.log(response)
         console.log(body)
-        # data.should.eql 100
+        assert error == null
         done()
     )
 
@@ -23,10 +20,7 @@ describe 'Client', ->
     client.get(
       '/me',
       (error, response, body) ->
-        console.log(error)
-        # console.log(response)
-        console.log(body)
-        # data.should.eql 100
+        assert error == null
         done()
     )
 
@@ -35,11 +29,8 @@ describe 'Client', ->
 
     client.post(
       '/rooms/participations/3822/comments',
-      {comment: {content: 'POPOPO'}}
+      {comment: {content: 'POPOPO'}},
       (error, response, body) ->
-        console.log('')
-        console.log(error)
-        # console.log(response)
-        console.log(body)
+        assert error == null
         done()
     )
