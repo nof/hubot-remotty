@@ -32,11 +32,10 @@ class Remotty extends Adapter
         participationId: @me.participation_id,
         callback: @socket_callback
       )
+      @emit "connected"
     )
 
   socket_callback: (event, data) =>
-    if event is 'join'
-      @emit "connected"
     if (event is 'comment') and (data.participation_id isnt "#{@me.participation_id}")
       @client.get(
         "/rooms/participations/#{data.participation_id}/comments/#{data.comment_id}",
