@@ -36,17 +36,18 @@ class Remotty extends Adapter
     )
 
   socket_callback: (event, data) =>
-    if (event is 'comment') and (data.participation_id isnt "#{@me.participation_id}")
+    if event is 'comment'
       @client.get(
         "/rooms/participations/#{data.participation_id}/comments/#{data.comment_id}",
         (error, response, body) =>
-          data = JSON.parse(body)
-          content = data.comment.content
-          contributor = data.comment.contributor
-          user = new User contributor.id, name: contributor.name
-          # TODO: ここで書き込んだ先の participation_id を受け渡ししたい
-          message = new TextMessage user, content, data.comment_id
-          @robot.receive message
+          json = JSON.parse(body)
+          content = json.comment.content
+          contributor = json.comment.contributor
+          if contributor.id isnt @me.participation_id
+            user = new User contributor.id, name: contributor.name
+            # TODO: ここで書き込んだ先の participation_id を受け渡ししたい
+            message = new TextMessage user, content, data.comment_id
+            @robot.receive message
       )
 
   auth_code: process.env.REMOTTY_AUTH_CODE
