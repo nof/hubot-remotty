@@ -13,7 +13,7 @@ class Remotty extends Adapter
     @robot.logger.info "Send"
     for message in messages
       @client.post(
-        "/rooms/participations/#{envelope.user.id}/comments",
+        "/rooms/participations/#{envelope.user.participation_id}/comments",
         {comment: {content: message}},
         (error, response, body) =>
           @robot.logger.info "Send message error: #{error}, response: #{response}, body: #{body}"
@@ -44,8 +44,7 @@ class Remotty extends Adapter
           content = json.comment.content
           contributor = json.comment.contributor
           if contributor.id isnt @me.participation_id
-            user = new User contributor.id, name: contributor.name
-            # TODO: ここで書き込んだ先の participation_id を受け渡ししたい
+            user = new User contributor.id, name: contributor.name, participation_id: data.participation_id
             message = new TextMessage user, content, data.comment_id
             @robot.receive message
       )
