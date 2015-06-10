@@ -25,19 +25,18 @@ class Remotty extends Adapter
   run: ->
     @robot.logger.info "Run"
     @client.get('/me', (error, response, body) =>
-      me = JSON.parse(body)
+      @me = JSON.parse(body)
       new Socket(
         url: @socket_url,
-        roomId: me.room_id,
-        participationId: me.participation_id,
+        roomId: @me.room_id,
+        participationId: @me.participation_id,
         callback: @socket_callback
       )
+      @emit "connected"
     )
 
   socket_callback: (event, data) =>
-    if event is 'join'
-      @emit "connected"
-    if event is 'comment'
+    if (event is 'comment') and (data.participation_id isnt "#{@me.participation_id}")
       @client.get(
         "/rooms/participations/#{data.participation_id}/comments/#{data.comment_id}",
         (error, response, body) =>
