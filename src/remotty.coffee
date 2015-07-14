@@ -14,7 +14,7 @@ class Remotty extends Adapter
     for message in messages
       @client.post(
         "/rooms/participations/#{envelope.user.participation_id}/comments",
-        {comment: {content: message}},
+        {comment: {content: message, show_log: true}},
         (error, response, body) =>
           @robot.logger.info "Send message error: #{error}, response: #{response}, body: #{body}"
       )
