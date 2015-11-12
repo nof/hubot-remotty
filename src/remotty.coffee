@@ -41,8 +41,10 @@ class Remotty extends Adapter
         "/rooms/participations/#{data.participation_id}/comments/#{data.comment_id}",
         (error, response, body) =>
           json = JSON.parse(body)
-          @robot.logger.info 'data(json)'
+          @robot.logger.info '>> json'
           @robot.logger.info json
+          @robot.logger.info json.comment
+          @robot.logger.info json.comment.content
           content = json.comment.content
           contributor = json.comment.contributor
           if contributor.id isnt @me.participation_id
