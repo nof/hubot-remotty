@@ -42,7 +42,7 @@ class Remotty extends Adapter
         (error, response, body) =>
           json = JSON.parse(body)
           @robot.logger.info 'data(json)'
-          @robot.logger.info data
+          @robot.logger.info json
           content = json.comment.content
           contributor = json.comment.contributor
           if contributor.id isnt @me.participation_id
